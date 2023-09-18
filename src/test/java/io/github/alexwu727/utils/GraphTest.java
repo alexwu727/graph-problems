@@ -155,6 +155,13 @@ public class GraphTest {
     }
 
     @Test
+    void testGetEdges_WithIntParameter() {
+        ArrayList<Edge> edges = graph.getEdges(0);
+        assertEquals(2, edges.size());
+        assertEquals(10, edges.get(0).getWeight());
+    }
+
+    @Test
     void getNumNodes() {
         assertEquals(3, graph.getNumNodes());
     }

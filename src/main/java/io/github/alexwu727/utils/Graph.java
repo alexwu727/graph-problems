@@ -3,6 +3,7 @@ package io.github.alexwu727.utils;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Graph {
@@ -106,6 +107,14 @@ public class Graph {
         return edges;
     }
 
+    public ArrayList<Edge> getEdges(int nodeId) {
+        ArrayList<Edge> res = new ArrayList<>();
+        edges.forEach( edge -> {
+            if (edge.getSrc() == nodeId || edge.getDest() == nodeId) res.add(edge);
+        });
+        return res;
+    }
+
     public int getNumNodes() {
         return numNodes;
     }
@@ -115,7 +124,7 @@ public class Graph {
     }
 
     public void printGraph() {
-        if (edges == null || edges.size() == 0) {
+        if (edges == null || edges.isEmpty()) {
             System.out.println("Graph is empty");
             return;
         }
@@ -126,7 +135,7 @@ public class Graph {
     }
 
     public void printNodes() {
-        if (nodes == null || nodes.size() == 0) {
+        if (nodes == null || nodes.isEmpty()) {
             System.out.println("Nodes are empty");
             return;
         }
