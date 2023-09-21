@@ -6,8 +6,8 @@ import io.github.alexwu727.utils.Node;
 
 import java.util.PriorityQueue;
 
-public class Prims {
-    public static Graph prims(Graph graph) {
+public class Prim {
+    public static Graph prim(Graph graph) {
         int n = graph.getNumNodes();
         int it = 0;
         Graph mst = new Graph();

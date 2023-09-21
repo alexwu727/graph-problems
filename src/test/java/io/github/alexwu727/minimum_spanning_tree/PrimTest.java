@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-class PrimsTest {
+class PrimTest {
 
     @Test
     void prims() {
@@ -27,7 +27,7 @@ class PrimsTest {
 
         graph.addEdges(edges);
 
-        Graph mst = Prims.prims(graph);
+        Graph mst = Prim.prim(graph);
         assertEquals(3, mst.getNumEdges());
         assertEquals(6, mst.getEdges().get(0).getWeight());
         assertEquals(5, mst.getEdges().get(1).getWeight());
