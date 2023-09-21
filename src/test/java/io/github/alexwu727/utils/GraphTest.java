@@ -32,6 +32,7 @@ public class GraphTest {
         assertNotNull(graph);
         assertEquals(0, graph.getNumEdges());
         assertEquals(0, graph.getNumNodes());
+        assertEquals(0, graph.getWeight());
     }
 
     @Test
@@ -45,6 +46,7 @@ public class GraphTest {
         assertNotNull(graph);
         assertEquals(3, graph.getNumEdges());
         assertEquals(3, graph.getNumNodes());
+        assertEquals(31, graph.getWeight());
     }
 
     @Test
@@ -64,6 +66,7 @@ public class GraphTest {
         assertNotNull(graph);
         assertEquals(3, graph.getNumEdges());
         assertEquals(4, graph.getNumNodes());
+        assertEquals(31, graph.getWeight());
     }
 
 
@@ -88,6 +91,7 @@ public class GraphTest {
         graph.addEdge(edge);
         assertEquals(4, graph.getNumEdges());
         assertEquals(4, graph.getNumNodes());
+        assertEquals(41, graph.getWeight());
         assertEquals(10, graph.getEdges().get(3).getWeight());
     }
     @Test
@@ -95,6 +99,7 @@ public class GraphTest {
         graph.addEdge(0, 3, 10);
         assertEquals(4, graph.getNumEdges());
         assertEquals(4, graph.getNumNodes());
+        assertEquals(41, graph.getWeight());
         assertEquals(10, graph.getEdges().get(3).getWeight());
     }
 
@@ -106,6 +111,7 @@ public class GraphTest {
         graph.addEdges(edges);
         assertEquals(5, graph.getNumEdges());
         assertEquals(4, graph.getNumNodes());
+        assertEquals(61, graph.getWeight());
     }
 
     @Test
@@ -116,6 +122,7 @@ public class GraphTest {
         graph.addEdges(graph2);
         assertEquals(5, graph.getNumEdges());
         assertEquals(4, graph.getNumNodes());
+        assertEquals(61, graph.getWeight());
     }
 
     @Test
@@ -123,6 +130,7 @@ public class GraphTest {
         graph.clear();
         assertEquals(0, graph.getNumEdges());
         assertEquals(0, graph.getNumNodes());
+        assertEquals(0, graph.getWeight());
     }
 
     @Test
@@ -162,13 +170,29 @@ public class GraphTest {
     }
 
     @Test
-    void getNumNodes() {
+    void testGetNumNodes() {
         assertEquals(3, graph.getNumNodes());
     }
 
     @Test
-    void getNumEdges() {
+    void testGetNumEdges() {
         assertEquals(3, graph.getNumEdges());
+    }
+
+    @Test
+    void testGetWeight() {
+        assertEquals(31, graph.getWeight());
+    }
+
+    @Test
+    void testResetVisited() {
+        Node node0 = graph.getNodes().get(0);
+        Node node1 = graph.getNodes().get(1);
+        node0.setVisited(true);
+        node1.setVisited(true);
+        graph.resetVisited();
+        assertEquals(false, node0.isVisited());
+        assertEquals(false, node1.isVisited());
     }
 
     @Test

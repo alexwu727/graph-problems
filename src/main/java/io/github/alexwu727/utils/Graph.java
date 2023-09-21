@@ -11,6 +11,7 @@ public class Graph {
     private Map<Integer, Node> nodes;
     private int numNodes;
     private int numEdges;
+    private int weight;
 
     public Graph() {
         this.edges = new ArrayList<>();
@@ -19,12 +20,14 @@ public class Graph {
 
     public Graph(ArrayList<Edge> edges) {
         this.edges = edges;
+        weight = edges.stream().mapToInt(Edge::getWeight).sum();
         this.numEdges = edges.size();
         edges.forEach(this::updateNodes);
     }
 
     public Graph(ArrayList<Edge> edges, ArrayList<Node> nodes) {
         this.edges = edges;
+        weight = edges.stream().mapToInt(Edge::getWeight).sum();
         this.addNodes(nodes);
         this.numEdges = edges.size();
         edges.forEach(this::updateNodes);
@@ -44,7 +47,8 @@ public class Graph {
 
     public void addEdge(Edge edge) {
         edges.add(edge);
-        this.numEdges++;
+        numEdges++;
+        weight += edge.getWeight();
         updateNodes(edge);
     }
 
@@ -66,6 +70,7 @@ public class Graph {
         this.nodes.clear();
         this.numEdges = 0;
         this.numNodes = 0;
+        this.weight = 0;
     }
 
     private void updateNodes(Edge edge) {
@@ -121,6 +126,14 @@ public class Graph {
 
     public int getNumEdges() {
         return numEdges;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void resetVisited() {
+        nodes.forEach((integer, node) -> node.setVisited(false));
     }
 
     public void printGraph() {
