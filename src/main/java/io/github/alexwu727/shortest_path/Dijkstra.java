@@ -27,6 +27,7 @@ public class Dijkstra {
             // update dist
             for (Edge edge : graph.getEdges(curr)) {
                 int nei = edge.getSrc() == curr ? edge.getDest() : edge.getSrc();
+                if (visited[nei]) continue;
                 if (dist[nei] > dist[curr] + edge.getWeight()) {
                     dist[nei] = dist[curr] + edge.getWeight();
                     prev[nei] = curr;
