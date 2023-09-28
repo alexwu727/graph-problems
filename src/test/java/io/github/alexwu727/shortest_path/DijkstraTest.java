@@ -37,7 +37,7 @@ class DijkstraTest {
         int[] dist = res.get("dist");
         int[] prev = res.get("prev");
         int[] expectedDist = new int[] {0, 5, 24, 9, 7};
-        int[] expectedPrev = new int[] {0, 0, 3, 4, 0};
+        int[] expectedPrev = new int[] {-1, 0, 3, 4, 0};
         assertArrayEquals(expectedDist, dist);
         assertArrayEquals(expectedPrev, prev);
     }

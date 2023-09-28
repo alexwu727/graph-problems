@@ -16,14 +16,22 @@ public class Dijkstra {
         int[] prev = new int[n];
         res.put("dist", dist);
         res.put("prev", prev);
+        PriorityQueue<Integer> heap = new PriorityQueue<>((a, b) -> dist[a] - dist[b]);
 
         int curr = startNode;
         for (int i = 0; i < n; i++) {
-            if (i == curr) dist[i] = 0;
+            if (i == curr) {
+                dist[i] = 0;
+                prev[i] = -1;
+            }
             else dist[i] = Integer.MAX_VALUE;
         }
-        visited[curr] = true;
-        for (int i = 0; i < n-1; i++) {
+
+        heap.add(curr);
+        while (!heap.isEmpty()) {
+            curr = heap.poll();
+            if (visited[curr]) continue;
+            visited[curr] = true;
             // update dist
             for (Edge edge : graph.getEdges(curr)) {
                 int nei = edge.getSrc() == curr ? edge.getDest() : edge.getSrc();
@@ -31,19 +39,10 @@ public class Dijkstra {
                 if (dist[nei] > dist[curr] + edge.getWeight()) {
                     dist[nei] = dist[curr] + edge.getWeight();
                     prev[nei] = curr;
+                    heap.add(nei);
                 }
             }
-            // choose next node
-            int min = Integer.MAX_VALUE;
-            for (int j = 0; j < n; j++) {
-                if (!visited[j] && dist[j] < min) {
-                    min = dist[j];
-                    curr = j;
-                }
-            }
-            visited[curr] = true;
         }
-
         return res;
     }
 
