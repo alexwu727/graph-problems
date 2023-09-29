@@ -13,12 +13,6 @@ class KruskalTest {
 
     @Test
     void kruskal() {
-        Graph graph = new Graph();
-        Node node0 = new Node(0);
-        Node node1 = new Node(1);
-        Node node2 = new Node(2);
-        Node node3 = new Node(3);
-
         ArrayList<Edge> edges = new ArrayList<>();
         edges.add(new Edge(0, 1, 10));
         edges.add(new Edge(0, 2, 6));
@@ -26,7 +20,7 @@ class KruskalTest {
         edges.add(new Edge(1, 3, 4));
         edges.add(new Edge(2, 3, 5));
 
-        graph.addEdges(edges);
+        Graph graph = new Graph(edges);
 
         Graph mst = Kruskal.kruskal(graph);
         assertEquals(3, mst.getNumEdges());
