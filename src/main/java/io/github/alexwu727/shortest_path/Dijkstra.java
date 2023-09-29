@@ -2,7 +2,6 @@ package io.github.alexwu727.shortest_path;
 
 import io.github.alexwu727.utils.Edge;
 import io.github.alexwu727.utils.Graph;
-import io.github.alexwu727.utils.Node;
 
 import java.util.*;
 
@@ -11,25 +10,18 @@ public class Dijkstra {
     public static HashMap<String, int[]> dijkstra (Graph graph, int startNode) {
         int n = graph.getNumNodes();
         boolean[] visited = new boolean[n];
-        HashMap<String, int[]> res = new HashMap<>();
         int[] dist = new int[n];
         int[] prev = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        Arrays.fill(prev, -1);
+        dist[startNode] = 0;
+        HashMap<String, int[]> res = new HashMap<>();
         res.put("dist", dist);
         res.put("prev", prev);
         PriorityQueue<Integer> heap = new PriorityQueue<>((a, b) -> dist[a] - dist[b]);
-
-        int curr = startNode;
-        for (int i = 0; i < n; i++) {
-            if (i == curr) {
-                dist[i] = 0;
-                prev[i] = -1;
-            }
-            else dist[i] = Integer.MAX_VALUE;
-        }
-
-        heap.add(curr);
+        heap.add(startNode);
         while (!heap.isEmpty()) {
-            curr = heap.poll();
+            int curr = heap.poll();
             if (visited[curr]) continue;
             visited[curr] = true;
             // update dist
@@ -44,13 +36,5 @@ public class Dijkstra {
             }
         }
         return res;
-    }
-
-    private static void display(String name, int[] array) {
-        System.out.print(name + ": ");
-        for (int i : array) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
     }
 }
