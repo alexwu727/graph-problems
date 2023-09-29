@@ -24,9 +24,27 @@ class PrinterTest {
     }
 
     @Test
-    void printArray() {
+    void printArray_WithIntArrayParameter() {
+        int[] arr = new int[]{1, 2, 3, 4, 5};
+        Printer.printArray(arr);
+        assertEquals("1, 2, 3, 4, 5" + "\n", outContent.toString());
+    }
+
+    @Test
+    void printArray_WithStringAndIntArrayParameter() {
         int[] arr = new int[]{1, 2, 3, 4, 5};
         Printer.printArray("arr", arr);
         assertEquals("arr: 1, 2, 3, 4, 5" + "\n", outContent.toString());
+    }
+
+    @Test
+    void printArray_WithStringAndIntMatrixParameter() {
+        int[][] arr = new int[][] {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}};
+        Printer.printArray("arr", arr);
+        assertEquals("""
+                arr:\s
+                1, 2, 3, 4, 5
+                6, 7, 8, 9, 10
+                """, outContent.toString());
     }
 }
