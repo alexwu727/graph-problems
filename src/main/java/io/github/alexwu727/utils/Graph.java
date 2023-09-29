@@ -114,8 +114,23 @@ public class Graph {
 
     public ArrayList<Edge> getEdges(int nodeId) {
         ArrayList<Edge> res = new ArrayList<>();
+        res.addAll(getInDegreeEdges(nodeId));
+        res.addAll(getOutDegreeEdges(nodeId));
+        return res;
+    }
+
+    public ArrayList<Edge> getInDegreeEdges(int nodeId) {
+        ArrayList<Edge> res = new ArrayList<>();
         edges.forEach( edge -> {
-            if (edge.getSrc() == nodeId || edge.getDest() == nodeId) res.add(edge);
+            if (edge.getDest() == nodeId) res.add(edge);
+        });
+        return res;
+    }
+
+    public ArrayList<Edge> getOutDegreeEdges(int nodeId) {
+        ArrayList<Edge> res = new ArrayList<>();
+        edges.forEach( edge -> {
+            if (edge.getSrc() == nodeId) res.add(edge);
         });
         return res;
     }

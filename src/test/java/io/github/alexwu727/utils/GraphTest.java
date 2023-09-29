@@ -13,17 +13,12 @@ public class GraphTest {
 
     @BeforeEach
     public void setUp() {
-        ArrayList<Node> nodes = new ArrayList<>();
-        nodes.add(new Node(0));
-        nodes.add(new Node(1));
-        nodes.add(new Node(2));
-
         ArrayList<Edge> edges = new ArrayList<>();
         edges.add(new Edge(0, 1, 10));
         edges.add(new Edge(0, 2, 6));
         edges.add(new Edge(1, 2, 15));
 
-        graph = new Graph(edges, nodes);
+        graph = new Graph(edges);
     }
 
     @Test
@@ -170,6 +165,20 @@ public class GraphTest {
     }
 
     @Test
+    void testGetInDegreeEdges() {
+        ArrayList<Edge> edges = graph.getInDegreeEdges(1);
+        assertEquals(1, edges.size());
+        assertEquals(10, edges.get(0).getWeight());
+    }
+
+    @Test
+    void testGetOutDegreeEdges() {
+        ArrayList<Edge> edges = graph.getOutDegreeEdges(1);
+        assertEquals(1, edges.size());
+        assertEquals(15, edges.get(0).getWeight());
+    }
+
+    @Test
     void testGetNumNodes() {
         assertEquals(3, graph.getNumNodes());
     }
@@ -191,8 +200,8 @@ public class GraphTest {
         node0.setVisited(true);
         node1.setVisited(true);
         graph.resetVisited();
-        assertEquals(false, node0.isVisited());
-        assertEquals(false, node1.isVisited());
+        assertFalse(node0.isVisited());
+        assertFalse(node1.isVisited());
     }
 
     @Test
